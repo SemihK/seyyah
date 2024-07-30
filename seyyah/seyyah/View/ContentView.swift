@@ -3,11 +3,25 @@ import MapKit
 
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
+    @State private var showingSheet = false
     
     var body: some View {
         VStack {
             HeaderView(userLocationText: userLocationText)
             MapView(region: $locationManager.region)
+                .onChange(of: locationManager.welcomeMessage) { _ in
+                    if locationManager.welcomeMessage != nil {
+                        showingSheet = true
+                    }
+                }
+                .sheet(isPresented: $showingSheet) {
+                    if let locationName = locationManager.welcomeMessage {
+                        // Example stamps for the location
+                        let stamps = ["Stamp 1", "Stamp 2", "Stamp 3"]
+                        StampSheet(locationName: locationName, stamps: stamps)
+                    }
+                }
+            
             Spacer()
                 .padding()
         }
@@ -17,9 +31,9 @@ struct ContentView: View {
         if let message = locationManager.welcomeMessage {
             return message
         } else if locationManager.userLocation != nil {
-            return "Kullanıcı Adı gelecek"
+            return "Konum Bilgisi Alınıyor..."
         } else {
-            return "Kullanıcı Adı"
+            return "Konum Bilgisi Alınıyor..."
         }
     }
 }

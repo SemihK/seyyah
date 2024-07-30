@@ -17,7 +17,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let geofenceLocations: [(CLLocationCoordinate2D, CLLocationDistance, String)] = [
         (CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), 1000, "San Francisco"),
         (CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437), 500, "Los Angeles"),
-        (CLLocationCoordinate2D(latitude: 41.0082, longitude: 28.9784), 500, "Istanbul Airport"), // İstanbul Havalimanı
+        (CLLocationCoordinate2D(latitude: 41.26900, longitude: 28.741), 100, "Istanbul Airport"), // İstanbul Havalimanı
         (CLLocationCoordinate2D(latitude: 41.0085, longitude: 28.9802), 500, "Hagia Sophia") // Ayasofya
         // Add more geofence locations here
     ]

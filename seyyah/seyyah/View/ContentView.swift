@@ -14,10 +14,12 @@ struct ContentView: View {
     }
     
     private var userLocationText: String {
-        if let location = locationManager.userLocation {
-            return "Lat: \(location.coordinate.latitude), Lon: \(location.coordinate.longitude)"
+        if let message = locationManager.welcomeMessage {
+            return message
+        } else if locationManager.userLocation != nil {
+            return "Kullanıcı Adı gelecek"
         } else {
-            return "Konum Bilgisi Alınıyor..."
+            return "Kullanıcı Adı"
         }
     }
 }
@@ -54,6 +56,7 @@ struct MapView: View {
                     .mapStyle(.standard(elevation: .realistic))
             } else {
                 // Fallback on earlier versions
+                Text("Map not available on this iOS version.")
             }
         }
         .padding()

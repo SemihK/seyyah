@@ -18,9 +18,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         (CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), 1000, "San Francisco"),
         (CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437), 500, "Los Angeles"),
         (CLLocationCoordinate2D(latitude: 41.26900, longitude: 28.741), 100, "Istanbul Airport"), // İstanbul Havalimanı
-        (CLLocationCoordinate2D(latitude: 41.0085, longitude: 28.9802), 500, "Hagia Sophia") // Ayasofya
+            (CLLocationCoordinate2D(latitude: 41.0082, longitude: 28.9784), 100, "Hagia Sophia"), // Ayasofya
+            (CLLocationCoordinate2D(latitude: 41.0054, longitude: 28.9778), 100, "Blue Mosque"), // Sultan Ahmet Camii
+            (CLLocationCoordinate2D(latitude: 41.0096, longitude: 28.9654), 200, "Topkapi Palace"), // Topkapı Sarayı
+            (CLLocationCoordinate2D(latitude: 41.0151, longitude: 28.9794), 300, "Basilica Cistern"), // Yerebatan Sarnıcı
+            (CLLocationCoordinate2D(latitude: 41.0138, longitude: 28.9794), 150, "Grand Bazaar"), // Kapalıçarşı
+            (CLLocationCoordinate2D(latitude: 41.0311, longitude: 28.9784), 150, "Galata Tower"), // Galata Kulesi
+            (CLLocationCoordinate2D(latitude: 41.0532, longitude: 28.9784), 200, "Dolmabahce Palace"), // Dolmabahçe Sarayı
+            (CLLocationCoordinate2D(latitude: 41.0369, longitude: 28.9755), 100, "Süleymaniye Mosque"), // Süleymaniye Camii
+            (CLLocationCoordinate2D(latitude: 41.0327, longitude: 28.9806), 100, "Taksim Square"), // Taksim Meydanı
+            (CLLocationCoordinate2D(latitude: 41.0319, longitude: 28.9813), 150, "Istiklal Avenue") // İstiklal Caddesi
         // Add more geofence locations here
-    ]
+        ]
+      
     
     override init() {
         super.init()

@@ -8,6 +8,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HeaderView(userLocationText: userLocationText)
+            FlightView(region: $locationManager.region)
             MapView(region: $locationManager.region)
                 .onChange(of: locationManager.welcomeMessage) { _ in
                     if locationManager.welcomeMessage != nil {
@@ -64,7 +65,8 @@ struct MapView: View {
         ZStack {
             if #available(iOS 17.0, *) {
                 Map(coordinateRegion: $region, showsUserLocation: true)
-                    .frame(width: 1000, height: 500)
+                    .padding()
+                    .frame(width: 400, height: 200)
                     .cornerRadius(10)
                     .shadow(radius: 10)
                     .mapStyle(.standard(elevation: .realistic))
@@ -76,6 +78,36 @@ struct MapView: View {
         .padding()
     }
 }
+
+struct FlightView: View {
+    @Binding var region: MKCoordinateRegion
+    
+    var body: some View {
+        ZStack {
+            Image("worldmap")
+                .resizable()
+                .blur(radius: 0.9)
+                .padding()
+            VStack {
+                Spacer()
+                HStack {
+                    Text("IST")
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .padding()
+                    Spacer()
+                    
+                    Text("AYT")
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .padding()
+                    Spacer() 
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     ContentView()

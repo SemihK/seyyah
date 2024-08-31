@@ -178,9 +178,9 @@ struct OnboardingView: View {
             
             if step == .finish {
                 VStack {
-                    Text("Welcome Message")
+                    Text("Welcome")
                         .font(.system(.title, design: .rounded, weight: .medium))
-                    Text("\(user.name)'s app")
+                    Text("\(user.name)")
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                 }
                 .multilineTextAlignment(.center)
@@ -204,16 +204,16 @@ struct OnboardingView: View {
             
             if step == .down {
                 VStack(spacing: 50) {
-                    Text("Your copywriting")
+                    Text("Your Digital Passport")
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .multilineTextAlignment(.center)
                     
                     VStack {
-                        Text("Your subheadline")
+                        Text("Senin gibi gezginler için.") // ingilizceye çevrilecek.
                             .font(.system(.title3, design: .rounded, weight: .regular))
                             .multilineTextAlignment(.center)
                         
-                        Image("powered")
+                        Image("TEST YAZISI")
                             .resizable()
                             .scaledToFit()
                             .frame(maxWidth: 160)
@@ -237,11 +237,11 @@ struct OnboardingView: View {
             
             if step == .text {
                 VStack() {
-                    Text("Your copywriting")
+                    Text("Keşfettiğiniz Yerler")
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .multilineTextAlignment(.center)
                     
-                    Text("Your subheadline")
+                    Text("Dijital pasaportunuza kayıt edilecektir.")
                         .font(.system(.title3, design: .rounded, weight: .regular))
                         .multilineTextAlignment(.center)
                 }
@@ -254,14 +254,14 @@ struct OnboardingView: View {
             VStack {
                 ZStack {
                     VStack {
-                        CardView(imageName: "example1", title: "Card Title", accentColor: accentColor)
+                        CardView(imageName: "Istanbul", title: "Istanbul", accentColor: accentColor)
                             .rotationEffect(Angle(degrees: -cardsRotation + cardRotation))
                             .offset(x: cardsXOffset - cardXOffset, y: cardsYOffset - cardYOffset - cardsCloudOffset)
                             .scaleEffect(step == .text && !UIScreen.isSE ? 1.3 : 1)
                             .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
                     }
                     
-                    CardView(imageName: "example2", title: "Card Title", accentColor: accentColor)
+                    CardView(imageName: "ispanya", title: "Guipúzcoa", accentColor: accentColor)
                         .rotationEffect(Angle(degrees: cardsRotation))
                         .offset(x: -cardsXOffset, y: -cardsYOffset + (cardsDownYOffset * 4))
                         .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
@@ -271,7 +271,7 @@ struct OnboardingView: View {
                 
                 if step == .name {
                     VStack(spacing: 0) {
-                        Text("Your copywriting")
+                        Text("Your Name")
                             .font(.system(.title, design: .rounded, weight: .medium))
                         
                         VStack(spacing: 4) {
@@ -329,7 +329,7 @@ struct OnboardingView: View {
                 }
                 
                 VStack(spacing: 0) {
-                    Text("Welcome to")
+                    Text("Welcome to ")
                         .font(.system(.title, design: .rounded, weight: .medium))
                     
                     Image("logo")
@@ -365,9 +365,9 @@ struct OnboardingView: View {
                             .frame(maxHeight: 42)
                             .foregroundStyle(accentColor)
                             .fontWeight(.regular)
-                        Text("Your copywriting")
+                        Text("Everything is Digital")
                             .font(.system(.title, design: .rounded, weight: .medium))
-                        Text("Your subheadline")
+                        Text("off course your trip is real")
                             .font(.system(.title3, design: .rounded, weight: .regular))
                             .lineLimit(3)
                             .multilineTextAlignment(.center)
@@ -384,12 +384,12 @@ struct OnboardingView: View {
                 }
                 
                 ZStack {
-                    CardView(imageName: "example4", title: "Card Title", accentColor: accentColor)
+                    CardView(imageName: "Paris", title: "Paris", accentColor: accentColor)
                         .rotationEffect(Angle(degrees: -cardsRotation - finishRotation))
                         .offset(x: cardsXOffset, y: cardsYOffset - cardsDownYOffset - (cardsCloudOffset * 0.9))
                         .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
                     
-                    CardView(imageName: "example3", title: "Card Title", accentColor: accentColor)
+                    CardView(imageName: "Florence", title: "Florence", accentColor: accentColor)
                         .rotationEffect(Angle(degrees: cardsRotation + finishRotation))
                         .offset(x: -cardsXOffset, y: -cardsYOffset + (cardsDownYOffset * 3) + cardsCloudOffset)
                         .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)

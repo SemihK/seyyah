@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import AuthenticationServices
 
 
 enum Step {
@@ -403,17 +403,12 @@ struct OnboardingView: View {
         .background(backgroundColor)
         .foregroundStyle(accentColor)
         .navigationDestination(isPresented: $navigate) {
-            //            Navigate towards you wish
-            //            NextView()
+            HomeView() // Kullanıcıyı HomeView ekranına yönlendiriyoruz.
         }
         .safeAreaInset(edge: .bottom) {
             Button {
                 if step == .finish {
-                    //                    Save logic or whatever you need before leaving
-                    //                    userManager.user = self.user
-                    
-                    // Toggle navigation logic
-                    navigate.toggle()
+                    navigate.toggle() // HomeView'a yönlendirme.
                 } else {
                     DispatchQueue.main.async {
                         withAnimation(.snappy(duration: 0.8), {
@@ -421,13 +416,12 @@ struct OnboardingView: View {
                         })
                     }
                 }
-                
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(maxWidth: step == .finish ? 200 : 140, maxHeight: 45)
                         .foregroundStyle(.red)
-                    
+
                     if step != .finish {
                         Image(systemName: "arrowshape.right")
                             .resizable()
@@ -444,15 +438,19 @@ struct OnboardingView: View {
                                 }
                             }
                     } else {
-                        Text("Start Your Journey")
+                         Text("Start Your Journey")
                             .foregroundStyle(.white)
                             .font(.system(.body, design: .rounded, weight: .semibold))
                            
-                          
                     }
-                        
-                       
                 }
+            }
+            .navigationDestination(isPresented: $navigate) {
+                HomeView()
+                    .navigationBarBackButtonHidden(true) // Back butonunu gizle
+            }
+            .transaction { transaction in
+                transaction.animation = nil
             }
             .padding(.bottom, UIScreen.isSE ? 8 : 0)
             .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : buttonOpacity)

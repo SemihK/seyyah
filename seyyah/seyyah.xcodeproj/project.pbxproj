@@ -12,6 +12,7 @@
 		609627552C8369E800BEA22E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609627542C8369E800BEA22E /* Assets.xcassets */; };
 		609627582C8369E800BEA22E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609627572C8369E800BEA22E /* Preview Assets.xcassets */; };
 		609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627612C836C4A00BEA22E /* OnboardingView.swift */; };
+		609627662C83B62000BEA22E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627652C83B62000BEA22E /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,9 @@
 		609627542C8369E800BEA22E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609627572C8369E800BEA22E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		609627612C836C4A00BEA22E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		609627632C83B2C900BEA22E /* seyyah.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = seyyah.entitlements; sourceTree = "<group>"; };
+		609627642C83B2D100BEA22E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		609627652C83B62000BEA22E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 		6096274F2C8369E600BEA22E /* seyyah */ = {
 			isa = PBXGroup;
 			children = (
+				609627642C83B2D100BEA22E /* Info.plist */,
+				609627632C83B2C900BEA22E /* seyyah.entitlements */,
 				609627602C836C2800BEA22E /* Data */,
 				6096275F2C836C2000BEA22E /* Model */,
 				6096275E2C836C1C00BEA22E /* View */,
@@ -76,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				609627612C836C4A00BEA22E /* OnboardingView.swift */,
+				609627652C83B62000BEA22E /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */,
+				609627662C83B62000BEA22E /* HomeView.swift in Sources */,
 				609627532C8369E600BEA22E /* ContentView.swift in Sources */,
 				609627512C8369E600BEA22E /* seyyahApp.swift in Sources */,
 			);
@@ -297,16 +305,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = seyyah/seyyah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"seyyah/Preview Content\"";
+				DEVELOPMENT_TEAM = LKU9ZN4MN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = seyyah/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = seyyah;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Apple ile Giriş yapmak için yüz tanıma kullanımı.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,9 +332,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = semihkesgin.seyyah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -325,16 +346,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = seyyah/seyyah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"seyyah/Preview Content\"";
+				DEVELOPMENT_TEAM = LKU9ZN4MN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = seyyah/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = seyyah;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Apple ile Giriş yapmak için yüz tanıma kullanımı.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,9 +373,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = semihkesgin.seyyah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

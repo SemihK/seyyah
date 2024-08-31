@@ -261,7 +261,7 @@ struct OnboardingView: View {
                             .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
                     }
                     
-                    CardView(imageName: "ispanya", title: "Guipúzcoa", accentColor: accentColor)
+                    CardView(imageName: "Barcelona", title: "Barcelona", accentColor: accentColor)
                         .rotationEffect(Angle(degrees: cardsRotation))
                         .offset(x: -cardsXOffset, y: -cardsYOffset + (cardsDownYOffset * 4))
                         .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)

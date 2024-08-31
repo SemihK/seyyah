@@ -11,6 +11,7 @@
 		609627532C8369E600BEA22E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627522C8369E600BEA22E /* ContentView.swift */; };
 		609627552C8369E800BEA22E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609627542C8369E800BEA22E /* Assets.xcassets */; };
 		609627582C8369E800BEA22E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609627572C8369E800BEA22E /* Preview Assets.xcassets */; };
+		609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627612C836C4A00BEA22E /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		609627522C8369E600BEA22E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		609627542C8369E800BEA22E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609627572C8369E800BEA22E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		609627612C836C4A00BEA22E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,9 @@
 		6096274F2C8369E600BEA22E /* seyyah */ = {
 			isa = PBXGroup;
 			children = (
+				609627602C836C2800BEA22E /* Data */,
+				6096275F2C836C2000BEA22E /* Model */,
+				6096275E2C836C1C00BEA22E /* View */,
 				609627502C8369E600BEA22E /* seyyahApp.swift */,
 				609627522C8369E600BEA22E /* ContentView.swift */,
 				609627542C8369E800BEA22E /* Assets.xcassets */,
@@ -65,6 +70,28 @@
 				609627572C8369E800BEA22E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6096275E2C836C1C00BEA22E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				609627612C836C4A00BEA22E /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6096275F2C836C2000BEA22E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		609627602C836C2800BEA22E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */,
 				609627532C8369E600BEA22E /* ContentView.swift in Sources */,
 				609627512C8369E600BEA22E /* seyyahApp.swift in Sources */,
 			);

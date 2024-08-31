@@ -8,6 +8,7 @@
 
 import SwiftUI
 import AuthenticationServices
+import Lottie
 
 
 enum Step {
@@ -187,15 +188,20 @@ struct OnboardingView: View {
             }
             
             if step == .text {
-                VStack() {
+                VStack {
                     Spacer()
                     ScrollView {
-                        Text(exampleString)
+                        VStack {
+                            Text(exampleString)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     .frame(maxHeight: UIScreen.height / 5)
                     .padding()
-                    .background(.white.opacity(0.5))
-                    .cornerRadius(16)
+                    .background(Color.white.opacity(0))
+                    .cornerRadius(10)
                 }
                 .frame(maxHeight: .infinity)
                 .padding(.horizontal)
@@ -213,11 +219,11 @@ struct OnboardingView: View {
                             .font(.system(.title3, design: .rounded, weight: .regular))
                             .multilineTextAlignment(.center)
                         
-                        Image("Passport")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 160)
-                            .padding(.top, 32)
+                        VStack {
+                            LottieView(animationFileName: "animation1.json", loopMode: .playOnce)
+                                .frame(width: 200, height: 200) 
+                                .scaleEffect(0.2)
+                        }
                     }
                     .opacity(cardsDownOpacity)
                     .onAppear {
@@ -325,7 +331,9 @@ struct OnboardingView: View {
                     }
                     .offset(y: 20)
                     .transition(.opacity)
-                    .animation(nil)
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
                 }
                 
                 VStack(spacing: 0) {
@@ -438,12 +446,16 @@ struct OnboardingView: View {
                                 }
                             }
                     } else {
-                         Text("Start Your Journey")
+                         Text("Start with offline")
                             .foregroundStyle(.white)
                             .font(.system(.body, design: .rounded, weight: .semibold))
+                       
                            
                     }
+                   
                 }
+             
+                
             }
             .navigationDestination(isPresented: $navigate) {
                 HomeView()
@@ -488,6 +500,24 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView()
+}
+
+struct LottieView: UIViewRepresentable {
+    
+    var animationFileName: String
+    let loopMode: LottieLoopMode
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+    
+    func makeUIView(context: Context) -> Lottie.LottieAnimationView {
+        let animationView = LottieAnimationView(name: animationFileName)
+        animationView.loopMode = loopMode
+        animationView.play()
+        animationView.contentMode = .scaleAspectFill
+        return animationView
+    }
 }
 
 struct CardView: View {

@@ -209,11 +209,11 @@ struct OnboardingView: View {
                         .multilineTextAlignment(.center)
                     
                     VStack {
-                        Text("Senin gibi gezginler için.") // ingilizceye çevrilecek.
+                        Text("for travelers like you.")
                             .font(.system(.title3, design: .rounded, weight: .regular))
                             .multilineTextAlignment(.center)
                         
-                        Image("TEST YAZISI")
+                        Image("Passport")
                             .resizable()
                             .scaledToFit()
                             .frame(maxWidth: 160)
@@ -237,11 +237,11 @@ struct OnboardingView: View {
             
             if step == .text {
                 VStack() {
-                    Text("Keşfettiğiniz Yerler")
+                    Text("Places You've Discovered")
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .multilineTextAlignment(.center)
                     
-                    Text("Dijital pasaportunuza kayıt edilecektir.")
+                    Text("It will be saved in your digital passport.")
                         .font(.system(.title3, design: .rounded, weight: .regular))
                         .multilineTextAlignment(.center)
                 }
@@ -308,14 +308,14 @@ struct OnboardingView: View {
                 
                 if step == .age {
                     VStack(spacing: 0) {
-                        Text("\(user.name) age?")
+                        Text("\(user.name)")
                             .font(.system(.title, design: .rounded, weight: .medium))
                         
                         VStack() {
                             Text("\(user.date.age()) years old")
                                 .font(.system(.largeTitle, design: .rounded, weight: .bold))
                             
-                            DatePicker("Date", selection: $user.date, displayedComponents: .date)
+                            DatePicker("Select Date", selection: $user.date, displayedComponents: .date)
                                 .datePickerStyle(.compact)
                                 .fixedSize()
                                 .tint(accentColor)
@@ -426,7 +426,7 @@ struct OnboardingView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 16)
                         .frame(maxWidth: step == .finish ? 200 : 140, maxHeight: 45)
-                        .foregroundStyle(accentColor)
+                        .foregroundStyle(.red)
                     
                     if step != .finish {
                         Image(systemName: "arrowshape.right")
@@ -444,10 +444,14 @@ struct OnboardingView: View {
                                 }
                             }
                     } else {
-                        Text("Finish Message")
+                        Text("Start Your Journey")
                             .foregroundStyle(.white)
                             .font(.system(.body, design: .rounded, weight: .semibold))
+                           
+                          
                     }
+                        
+                       
                 }
             }
             .padding(.bottom, UIScreen.isSE ? 8 : 0)

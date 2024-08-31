@@ -25,7 +25,7 @@ struct OnboardingView: View {
     @FocusState private var isTextFieldFocused: Bool
     
     // Tweak these colors if you want
-    let backgroundColor: Color = .white
+    let backgroundColor: Color = .accentColor
     let accentColor: Color = .black
     //
     

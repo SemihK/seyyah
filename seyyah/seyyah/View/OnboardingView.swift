@@ -271,7 +271,7 @@ struct OnboardingView: View {
                 
                 if step == .name {
                     VStack(spacing: 0) {
-                        Text("Your Name")
+                        Text("How should we call you?")
                             .font(.system(.title, design: .rounded, weight: .medium))
                         
                         VStack(spacing: 4) {
@@ -485,7 +485,7 @@ struct OnboardingView: View {
         step = nextStep
     }
     
-    var exampleString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    var exampleString = "Istanbul is a city where history and modernity coexist in harmony. At every corner, you can discover remnants of various civilizations. The mesmerizing architecture of the Hagia Sophia, the impressive grandeur of the Topkapı Palace, and the graceful lines of the Süleymaniye Mosque are all evidence of Istanbul's deep-rooted history."
 }
 
 #Preview {

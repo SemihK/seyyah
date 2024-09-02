@@ -418,7 +418,8 @@ struct OnboardingView: View {
         .safeAreaInset(edge: .bottom) {
             Button {
                             if step == .finish {
-                                isOnboardingCompleted = true // Onboarding tamamlandığında durumu kaydet
+                                UserDefaults.standard.set(user.name, forKey: "userName")
+                                isOnboardingCompleted = true 
                                 navigate = true
                             } else {
                                 DispatchQueue.main.async {

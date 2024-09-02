@@ -24,6 +24,7 @@ enum Step {
 
 struct OnboardingView: View {
     @FocusState private var isTextFieldFocused: Bool
+    @State var navigate = false
     
     // Tweak these colors if you want
     let backgroundColor: Color = .accentColor
@@ -37,7 +38,7 @@ struct OnboardingView: View {
     @State var buttonOpacity: CGFloat = 0
     @State var cardsDownOpacity: CGFloat = 0
     @State var cloudOpacity: CGFloat = 0
-    @State var navigate = false
+
     @State var user: User = User(id: UUID().uuidString, name: "", date: Date().subtractingYears(4))
     
     var cardsOpacity: CGFloat {
@@ -221,7 +222,7 @@ struct OnboardingView: View {
                         
                         VStack {
                             LottieView(animationFileName: "animation1.json", loopMode: .playOnce)
-                                .frame(width: 200, height: 200) 
+                                .frame(width: 200, height: 200)
                                 .scaleEffect(0.2)
                         }
                     }
@@ -415,58 +416,55 @@ struct OnboardingView: View {
         }
         .safeAreaInset(edge: .bottom) {
             Button {
-                if step == .finish {
-                    navigate.toggle() // HomeView'a yönlendirme.
-                } else {
-                    DispatchQueue.main.async {
-                        withAnimation(.snappy(duration: 0.8), {
-                            advanceStep()
-                        })
-                    }
-                }
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .frame(maxWidth: step == .finish ? 200 : 140, maxHeight: 45)
-                        .foregroundStyle(.red)
+                   if step == .finish {
+                       navigate = true
+                   } else {
+                       DispatchQueue.main.async {
+                           withAnimation(.snappy(duration: 0.8)) {
+                               advanceStep()
+                           }
+                       }
+                   }
+               } label: {
+                   ZStack {
+                       RoundedRectangle(cornerRadius: 16)
+                           .frame(maxWidth: step == .finish ? 200 : 140, maxHeight: 45)
+                           .foregroundStyle(.red)
 
-                    if step != .finish {
-                        Image(systemName: "arrowshape.right")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: 24)
-                            .foregroundStyle(.white)
-                            .fontWeight(.medium)
-                            .offset(x: arrowOffset)
-                            .onAppear {
-                                DispatchQueue.main.async {
-                                    withAnimation(.easeInOut(duration: 0.5).repeatForever()) {
-                                        arrowOffset = 3
-                                    }
-                                }
-                            }
-                    } else {
-                         Text("Start with offline")
-                            .foregroundStyle(.white)
-                            .font(.system(.body, design: .rounded, weight: .semibold))
-                       
-                           
-                    }
-                   
+                       if step != .finish {
+                           Image(systemName: "arrowshape.right")
+                               .resizable()
+                               .scaledToFit()
+                               .frame(maxHeight: 24)
+                               .foregroundStyle(.white)
+                               .fontWeight(.medium)
+                               .offset(x: arrowOffset)
+                               .onAppear {
+                                   DispatchQueue.main.async {
+                                       withAnimation(.easeInOut(duration: 0.5).repeatForever()) {
+                                           arrowOffset = 3
+                                       }
+                                   }
+                               }
+                       } else {
+                           Text("Start with offline")
+                               .foregroundStyle(.white)
+                               .font(.system(.body, design: .rounded, weight: .semibold))
+                       }
+                   }
+               }
+               .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : buttonOpacity)
+               .padding(.bottom, UIScreen.isSE ? 8 : 0)
+            NavigationLink(
+                destination: HomeView()
+                    .navigationBarBackButtonHidden(true),
+                isActive: $navigate,
+                label: {
+                    EmptyView()
                 }
-             
-                
-            }
-            .navigationDestination(isPresented: $navigate) {
-                HomeView()
-                    .navigationBarBackButtonHidden(true) // Back butonunu gizle
-            }
-            .transaction { transaction in
-                transaction.animation = nil
-            }
-            .padding(.bottom, UIScreen.isSE ? 8 : 0)
-            .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : buttonOpacity)
-        }
+            )
+           }
+        
     }
     
     func advanceStep() {

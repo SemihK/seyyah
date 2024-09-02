@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct HomeView: View {
+    var userName: String {
+        UserDefaults.standard.string(forKey: "userName") ?? "User"
+    }
+
     var body: some View {
         VStack {
-            // HomeView içeriği
-            Text("Welcome to HomeView")
+            ZStack {
+                Text("Welcome \(userName)")
+                    .font(.largeTitle)
+                    .padding()
+                Rectangle()
+                    .foregroundStyle(.accent)
+                    .frame(width: 350, height: 100)
+                    .padding(.top, -350)
+            }
         }
-        .navigationBarBackButtonHidden(true) // Back butonunu gizle
+        .navigationBarBackButtonHidden(true)
     }
 }
 #Preview {

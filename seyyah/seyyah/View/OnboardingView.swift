@@ -23,8 +23,9 @@ enum Step {
 }
 
 struct OnboardingView: View {
-    @FocusState private var isTextFieldFocused: Bool
-    @State var navigate = false
+    @AppStorage("onboardingCompleted") private var isOnboardingCompleted: Bool = false
+        @FocusState private var isTextFieldFocused: Bool
+        @State var navigate = false
     
     // Tweak these colors if you want
     let backgroundColor: Color = .accentColor
@@ -416,15 +417,16 @@ struct OnboardingView: View {
         }
         .safeAreaInset(edge: .bottom) {
             Button {
-                   if step == .finish {
-                       navigate = true
-                   } else {
-                       DispatchQueue.main.async {
-                           withAnimation(.snappy(duration: 0.8)) {
-                               advanceStep()
-                           }
-                       }
-                   }
+                            if step == .finish {
+                                isOnboardingCompleted = true // Onboarding tamamlandığında durumu kaydet
+                                navigate = true
+                            } else {
+                                DispatchQueue.main.async {
+                                    withAnimation(.snappy(duration: 0.8), {
+                                        advanceStep()
+                                    })
+                                }
+                            }
                } label: {
                    ZStack {
                        RoundedRectangle(cornerRadius: 16)
@@ -453,16 +455,13 @@ struct OnboardingView: View {
                        }
                    }
                }
+            
                .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : buttonOpacity)
                .padding(.bottom, UIScreen.isSE ? 8 : 0)
-            NavigationLink(
-                destination: HomeView()
-                    .navigationBarBackButtonHidden(true),
-                isActive: $navigate,
-                label: {
-                    EmptyView()
-                }
-            )
+               .navigationDestination(isPresented: $navigate) {
+                           HomeView()
+                               .navigationBarBackButtonHidden(true)
+                       }
            }
         
     }

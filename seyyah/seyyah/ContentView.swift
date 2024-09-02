@@ -9,24 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showOnboarding: Bool
-
-    init() {
-        // Bayrağı kontrol et ve uygun ekranı göster
-        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        self._showOnboarding = State(initialValue: !hasCompletedOnboarding)
-    }
+    @AppStorage("onboardingCompleted") private var isOnboardingCompleted: Bool = false
     
     var body: some View {
-        NavigationView {
-            if showOnboarding {
-                OnboardingView()
-                    .transition(.opacity)
-            } else {
-                HomeView()
-            }
+        if isOnboardingCompleted {
+            HomeView()
+        } else {
+            OnboardingView()
         }
     }
+}
+
+#Preview {
+    ContentView()
 }
 #Preview {
     ContentView()

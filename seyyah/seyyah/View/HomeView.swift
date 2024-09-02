@@ -8,21 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-<<<<<<< Updated upstream
-    var body: some View {
-        VStack {
-            // HomeView içeriği
-            Text("Welcome to HomeView")
-        }
-        .navigationBarBackButtonHidden(true) // Back butonunu gizle
-=======
+    
     var userName: String {
-        UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
-    }
-
+            UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
+        }
     var body: some View {
-        VStack {
-            
+            VStack {
             ZStack {
                 Color.accentColor
                                 .ignoresSafeArea()
@@ -55,7 +46,7 @@ struct HomeView: View {
         }
         .navigationBarBackButtonHidden(true)
         
->>>>>>> Stashed changes
+
     }
     
 }

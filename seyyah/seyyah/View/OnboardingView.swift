@@ -416,6 +416,7 @@ struct OnboardingView: View {
         .safeAreaInset(edge: .bottom) {
             Button {
                 if step == .finish {
+                    UserDefaults.standard.set(user.name, forKey: "userName")
                     navigate.toggle() // HomeView'a yönlendirme.
                 } else {
                     DispatchQueue.main.async {

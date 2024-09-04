@@ -340,7 +340,7 @@ struct OnboardingView: View {
                     Text("Welcome to ")
                         .font(.system(.title, design: .rounded, weight: .medium))
                     
-                    Image("text-logo")
+                    Image("Logo-Text")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 180)

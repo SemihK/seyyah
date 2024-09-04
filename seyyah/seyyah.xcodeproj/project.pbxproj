@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C25692C88DF8000D9CED3 /* TimeMessage.swift */; };
 		609627512C8369E600BEA22E /* seyyahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627502C8369E600BEA22E /* seyyahApp.swift */; };
 		609627532C8369E600BEA22E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627522C8369E600BEA22E /* ContentView.swift */; };
 		609627552C8369E800BEA22E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609627542C8369E800BEA22E /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		605C25692C88DF8000D9CED3 /* TimeMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMessage.swift; sourceTree = "<group>"; };
 		6096274D2C8369E600BEA22E /* seyyah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seyyah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609627502C8369E600BEA22E /* seyyahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seyyahApp.swift; sourceTree = "<group>"; };
 		609627522C8369E600BEA22E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		6096275F2C836C2000BEA22E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				605C25692C88DF8000D9CED3 /* TimeMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */,
+				605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */,
 				609627662C83B62000BEA22E /* HomeView.swift in Sources */,
 				609627532C8369E600BEA22E /* ContentView.swift in Sources */,
 				609627512C8369E600BEA22E /* seyyahApp.swift in Sources */,

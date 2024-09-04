@@ -6,48 +6,128 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HomeView: View {
     
+    
     var userName: String {
-            UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
-        }
+        UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
+    }
     var body: some View {
-            VStack {
+        @StateObject var viewModel = ContentViewModel()
+        VStack {
             ZStack {
                 Color.accentColor
-                                .ignoresSafeArea()
+                    .ignoresSafeArea()
                 ZStack {
                     RoundedRectangle(cornerRadius: 20.0)
                         .frame(width: 320, height: 90)
                         .foregroundColor(.gray.opacity(0.1))
-                    Text("Good Day \(userName)") // MARK zaman bazlı karşılama mesajı eklenecek.
-                        .font(.largeTitle)
-                        .padding()
-                        .foregroundStyle(LinearGradient(
-                            colors: [.red, .purple, .blue],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ))
+                    
+                    HStack(alignment: .center) {
+                        Image(systemName: "sun.haze.fill")
+                            .foregroundStyle(.yellow)
+                        Text(greetingMessage)
+                            .font(.headline)
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.red, .purple, .blue],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                    
                 }
-                .padding(.top, -350)
-                // MARK harita görünümü gelecek kullanıcının nerede olduğunu göstereceğiz.
-                RoundedRectangle(cornerRadius: 20.0)
-                    .frame(width: 320, height: 200)
-                    .foregroundColor(.gray.opacity(0.1))
-                    .padding(.top, -230)
-                // MARK 
-                RoundedRectangle(cornerRadius: 20.0)
-                    .frame(width: 320, height: 200)
-                    .foregroundColor(.gray.opacity(0.1))
-                    .padding(.top, 200)
             }
             
+            
+            
+            
+            .padding(.top, -350)
+            // MARK harita görünümü gelecek kullanıcının nerede olduğunu göstereceğiz.
+            ZStack {
+                RoundedRectangle(cornerRadius: 20.0)
+                Map(coordinateRegion: viewModel.binding,showsUserLocation: true,userTrackingMode: .constant(.follow))
+                    .edgesIgnoringSafeArea(.all)
+                    .onAppear(perform: {
+                        viewModel.checkIfLocationIsEnabled()
+                    })
+            }
+            .clipShape(.buttonBorder)
+            .frame(width: 320, height: 200)
+            .foregroundColor(.gray.opacity(0.1))
+            .padding(.top, -230)
+            
+            
+            // MARK
+            RoundedRectangle(cornerRadius: 20.0)
+                .frame(width: 320, height: 200)
+                .foregroundColor(.gray.opacity(0.1))
+                .padding(.top, 200)
         }
+        
+    }
+
         .navigationBarBackButtonHidden(true)
         
 
     }
+    final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+        var locationManager: CLLocationManager?
+
+        @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.457105, longitude: -80.508361), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+
+        var binding: Binding<MKCoordinateRegion> {
+            Binding {
+                self.mapRegion
+            } set: { newRegion in
+                self.mapRegion = newRegion
+            }
+        }
+
+        func checkIfLocationIsEnabled() {
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager = CLLocationManager()
+                locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager!.delegate = self
+            } else {
+                print("Show an alert letting them know this is off")
+            }
+        }
+
+        func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            let previousAuthorizationStatus = manager.authorizationStatus
+            manager.requestWhenInUseAuthorization()
+            if manager.authorizationStatus != previousAuthorizationStatus {
+                checkLocationAuthorization()
+            }
+        }
+
+        private func checkLocationAuthorization() {
+            guard let location = locationManager else {
+                return
+            }
+
+            switch location.authorizationStatus {
+            case .notDetermined:
+                print("Location authorization is not determined.")
+            case .restricted:
+                print("Location is restricted.")
+            case .denied:
+                print("Location permission denied.")
+            case .authorizedAlways, .authorizedWhenInUse:
+                if let location = location.location {
+                    mapRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                }
+
+            default:
+                break
+            }
+        }
+    }
+
+
     
 }
 #Preview {

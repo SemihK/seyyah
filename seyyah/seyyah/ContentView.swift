@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("onboardingCompleted") private var onboardingCompleted: Bool = false
+
     var body: some View {
-        if UserDefaults.standard.bool(forKey: "onboardingCompleted") {
+        if onboardingCompleted {
             HomeView()
         } else {
             OnboardingView()
         }
     }
 }
-
 #Preview {
     ContentView()
     

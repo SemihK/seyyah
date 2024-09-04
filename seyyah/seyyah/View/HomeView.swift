@@ -26,8 +26,8 @@ struct HomeView: View {
                         .foregroundColor(.gray.opacity(0.1))
                     
                     HStack(alignment: .center) {
-                        Image(systemName: "sun.haze.fill")
-                            .foregroundStyle(.yellow)
+                        Image(systemName: greetingImageName)
+                            .foregroundStyle(greetingImageColor)
                         Text(greetingMessage)
                             .font(.headline)
                             .foregroundStyle(

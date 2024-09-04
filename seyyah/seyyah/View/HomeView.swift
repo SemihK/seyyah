@@ -49,16 +49,20 @@ struct HomeView: View {
             
             .padding(.top, -350)
             // MARK harita görünümü gelecek kullanıcının nerede olduğunu göstereceğiz.
-            ZStack {
-              
-                RoundedRectangle(cornerRadius: 20.0)
-                Map(coordinateRegion: viewModel.binding,showsUserLocation: true,userTrackingMode: .constant(.follow))
-                
-                    .edgesIgnoringSafeArea(.all)
-                    .onAppear(perform: {
-                        viewModel.checkIfLocationIsEnabled()
-                        
-                    })
+                ZStack {
+                                   RoundedRectangle(cornerRadius: 20.0)
+                                       .frame(width: 320, height: 200)
+                                       .foregroundColor(.gray.opacity(0.1))
+                                   
+                                   Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true)
+                                       .edgesIgnoringSafeArea(.all)
+                                       .onAppear {
+                                           viewModel.checkIfLocationIsEnabled()
+                                       }
+                    .mapControls {
+                                MapUserLocationButton()
+                               
+                            }
                     .mapStyle(
                                 .standard(
                                     elevation: .flat,
@@ -97,59 +101,35 @@ struct HomeView: View {
 
     final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         var locationManager: CLLocationManager?
-
-        @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.457105, longitude: -80.508361), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-
-        var binding: Binding<MKCoordinateRegion> {
-            Binding {
-                self.mapRegion
-            } set: { newRegion in
-                self.mapRegion = newRegion
-            }
-        }
-
+        
+        @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.27224275, longitude: 28.73492786), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+        
         func checkIfLocationIsEnabled() {
             if CLLocationManager.locationServicesEnabled() {
                 locationManager = CLLocationManager()
                 locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager!.delegate = self
+                locationManager?.delegate = self
+                locationManager?.requestWhenInUseAuthorization()
             } else {
                 print("Lokasyon açık değil.")
             }
         }
-
+        
         func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-            let previousAuthorizationStatus = manager.authorizationStatus
-            manager.requestWhenInUseAuthorization()
-            if manager.authorizationStatus != previousAuthorizationStatus {
-                checkLocationAuthorization()
-            }
-        }
-
-        private func checkLocationAuthorization() {
-            guard let location = locationManager else {
-                return
-            }
-
-            switch location.authorizationStatus {
+            switch manager.authorizationStatus {
             case .notDetermined:
-                print("Location authorization is not determined.")
-            case .restricted:
-                print("Location is restricted.")
-            case .denied:
-                print("Location permission denied.")
+                manager.requestWhenInUseAuthorization()
+            case .restricted, .denied:
+                print("Location permission denied or restricted.")
             case .authorizedAlways, .authorizedWhenInUse:
-                if let location = location.location {
+                if let location = manager.location {
                     mapRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
                 }
-
-            default:
+            @unknown default:
                 break
             }
         }
     }
-
-
     
 }
 #Preview {

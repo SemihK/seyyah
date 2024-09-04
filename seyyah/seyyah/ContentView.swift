@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
+        if UserDefaults.standard.bool(forKey: "onboardingCompleted") {
+            HomeView()
+        } else {
             OnboardingView()
         }
     }
@@ -17,4 +19,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+    
 }

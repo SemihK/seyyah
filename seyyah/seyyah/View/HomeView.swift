@@ -9,16 +9,18 @@ import SwiftUI
 import MapKit
 
 struct HomeView: View {
-    
-    
-    var userName: String {
-        UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
-    }
+   
+   
     var body: some View {
+
         @StateObject var viewModel = ContentViewModel()
-        VStack {
+    
+        var userName: String {
+            UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
+        }
+            VStack {
             ZStack {
-                Color.accentColor
+                Color.background
                     .ignoresSafeArea()
                 ZStack {
                     RoundedRectangle(cornerRadius: 20.0)
@@ -28,6 +30,7 @@ struct HomeView: View {
                     HStack(alignment: .center) {
                         Image(systemName: greetingImageName)
                             .foregroundStyle(greetingImageColor)
+                        
                         Text(greetingMessage)
                             .font(.headline)
                             .foregroundStyle(
@@ -47,12 +50,21 @@ struct HomeView: View {
             .padding(.top, -350)
             // MARK harita görünümü gelecek kullanıcının nerede olduğunu göstereceğiz.
             ZStack {
+              
                 RoundedRectangle(cornerRadius: 20.0)
                 Map(coordinateRegion: viewModel.binding,showsUserLocation: true,userTrackingMode: .constant(.follow))
+                
                     .edgesIgnoringSafeArea(.all)
                     .onAppear(perform: {
                         viewModel.checkIfLocationIsEnabled()
+                        
                     })
+                    .mapStyle(
+                                .standard(
+                                    elevation: .flat,
+                                    pointsOfInterest: .including([.airport]),
+                                    showsTraffic: false
+                                ))
             }
             .clipShape(.buttonBorder)
             .frame(width: 320, height: 200)
@@ -73,6 +85,16 @@ struct HomeView: View {
         
 
     }
+    func checkIfOnboardingCompleted() {
+            let onboardingCompleted = UserDefaults.standard.bool(forKey: "onboardingCompleted")
+            if !onboardingCompleted {
+                // Kullanıcı onboarding'i tamamlamadıysa, onboarding ekranına geri dön
+                // Burada Navigation veya diğer yöntemlerle yönlendirme yapılabilir
+                print("Kullanıcı onboarding'e yönlendirilecek.")
+            }
+        }
+    
+
     final class ContentViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         var locationManager: CLLocationManager?
 
@@ -92,7 +114,7 @@ struct HomeView: View {
                 locationManager?.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager!.delegate = self
             } else {
-                print("Show an alert letting them know this is off")
+                print("Lokasyon açık değil.")
             }
         }
 
@@ -132,4 +154,5 @@ struct HomeView: View {
 }
 #Preview {
     HomeView()
+
 }

@@ -26,8 +26,8 @@ struct OnboardingView: View {
     @FocusState private var isTextFieldFocused: Bool
     
     // Tweak these colors if you want
-    let backgroundColor: Color = .accentColor
-    let accentColor: Color = .black
+    let backgroundColor: Color = .background
+    let accentColor: Color = .backgroundText
     //
     
     @State var step: Step = .start
@@ -340,7 +340,7 @@ struct OnboardingView: View {
                     Text("Welcome to ")
                         .font(.system(.title, design: .rounded, weight: .medium))
                     
-                    Image("logo")
+                    Image("text-logo")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 180)
@@ -417,7 +417,8 @@ struct OnboardingView: View {
             Button {
                 if step == .finish {
                     UserDefaults.standard.set(user.name, forKey: "userName")
-                    navigate.toggle() // HomeView'a yönlendirme.
+                    UserDefaults.standard.set(true, forKey: "onboardingCompleted")
+                    navigate.toggle()
                 } else {
                     DispatchQueue.main.async {
                         withAnimation(.snappy(duration: 0.8), {
@@ -529,7 +530,8 @@ struct CardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0)
-                .foregroundStyle(.white)
+                .foregroundStyle(.card)
+               // .opacity(0.7)
                 .shadow(radius: 5)
             
             VStack(spacing: 4) {

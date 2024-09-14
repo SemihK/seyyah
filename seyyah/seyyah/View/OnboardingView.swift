@@ -9,7 +9,6 @@
 import SwiftUI
 import Lottie
 
-
 enum Step {
     case start
     case appear
@@ -321,7 +320,7 @@ struct OnboardingView: View {
                                     Text("Where are you from?")
                                         .font(.system(.largeTitle, design: .rounded).bold())
                                     
-                                    Text("Select your country for digital passport.")
+                                    Text("Click on the flag and choose your country")
                                         .tint(.pink)
                                         .foregroundStyle(.backgroundText)
                                     
@@ -334,11 +333,14 @@ struct OnboardingView: View {
                                             .padding()
                                             .cornerRadius(10)
                                     }
+                            
                                 }
                                 .padding()
-                                .sheet(isPresented: $isShowingSheet) {
+                                .fullScreenCover(isPresented: $isShowingSheet) {
                                     CountrySelectionView(selectedCountryFlag: $selectedCountryFlag)
+                                
                                 }
+                        
                                 .onAppear {
                                     loadSavedCountry()
                                 }

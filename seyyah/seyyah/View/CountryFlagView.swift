@@ -124,16 +124,17 @@ struct CountrySelectionView: View {
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
-        GridItem(.flexible()) // Her satırda 3 sütun olacak
+        GridItem(.flexible())
     ]
     
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Select your country for digital passport.")
-                .tint(.pink)
-                .foregroundStyle(.backgroundText)
+            Image("Logo-Text")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 150)
             
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
@@ -157,10 +158,13 @@ struct CountrySelectionView: View {
                 .padding(.horizontal)
             }
             
-            Button("Save Country") {
+            Button("Save") {
                 saveCountrySelection()
-                dismiss() // Sheet'i kapat
+                dismiss()
             }
+            .tint(.red)
+            .controlSize(.extraLarge)
+            .buttonStyle(.bordered)
             .padding(.top)
         }
         .padding()

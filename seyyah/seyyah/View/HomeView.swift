@@ -26,12 +26,12 @@ struct HomeView: View {
          {
                 
             ZStack {
-                Color.white
+                Color.background
                     .ignoresSafeArea()
                 ZStack {
                     RoundedRectangle(cornerRadius: 20.0)
                         .frame(width: 320, height: 90)
-                        .foregroundColor(.gray.opacity(0.1))
+                        .foregroundColor(.background)
                     
                     HStack(alignment: .center) {
                         Image(systemName: greetingImageName)
@@ -79,17 +79,16 @@ struct HomeView: View {
                                     showsTraffic: false
                                 ))
             }
-            .clipShape(.buttonBorder)
+                .clipShape(.buttonBorder)
             .frame(width: 320, height: 200)
             .foregroundColor(.gray.opacity(0.1))
             .padding(.bottom, 250)
             
             
             // MARK
-            RoundedRectangle(cornerRadius: 20.0)
-                .frame(width: 320, height: 200)
-                .foregroundColor(.gray.opacity(0.1))
-                .padding(.top, 200)
+                ZStack{
+                    StatisticsView()
+                }
         }
                 
     }

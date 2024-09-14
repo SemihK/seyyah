@@ -4,72 +4,69 @@
 //
 //  Created by semihkesgin on 5.09.2024.
 //
-
 import SwiftUI
 
-struct PassportStampView: View {
-    let stampImage: String
-    let stampText: String
+struct StatisticsView: View {
+    @Environment(\.colorScheme) var colorScheme
+    // Örnek veri
+    let totalTrips: Int = 12
+    let visitedCountries: Int = 8
+    let passportStamps: Int = 15
     
     var body: some View {
         VStack {
-            Image(systemName: stampImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .padding()
-            
-            Text(stampText)
-                .font(.title)
-                .padding()
-        }
-    }
-}
-
-struct PassportSheetView: View {
-    @State private var isSheetPresented = false
-    
-    var body: some View {
-        VStack {
-            Button(action: {
-                isSheetPresented = true
-            }) {
-                Text("Pasaport Mühürlerini Göster")
-                    .font(.title)
+            RoundedRectangle(cornerRadius: 20.0)
+                .frame(width: 320, height: 200)
+                .foregroundColor(.black)
+                .overlay(
+                    VStack(spacing: 20) {
+                        Text("Your Passport Stats")
+                            .font(.headline)
+                            .foregroundStyle(.gray)
+                            .padding(.top, 20)
+                        
+                        HStack {
+                            StatisticItem(title: "Total Trips", value: "\(totalTrips)")
+                            StatisticItem(title: "Visited Countries", value: "\(visitedCountries)")
+                            StatisticItem(title: "Stamps", value: "\(passportStamps)")
+                        }
+                    }
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-        }
-        .sheet(isPresented: $isSheetPresented) {
-            TabView {
-                Image("Istanbul-Stamp")
-                    .resizable()
-                        .scaledToFit()
-                        .frame(width: 300, height: 300)
-                    .tabItem {
-                        Text("Sayfa 1")
-                    }
-                
-                PassportStampView(stampImage: "airplane", stampText: "Uçak Mührü")
-                    .tabItem {
-                        Text("Sayfa 2")
-                    }
-                
-                PassportStampView(stampImage: "star", stampText: "Yıldız Mührü")
-                    .tabItem {
-                        Text("Sayfa 3")
-                    }
-            }
-            .tabViewStyle(PageTabViewStyle())
+                )
+                .padding(.top, 200)
         }
     }
 }
 
+struct StatisticItem: View {
+    @Environment(\.colorScheme) var colorScheme
+    let title: String
+    let value: String
+    
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.subheadline)
+                .foregroundColor(colorScheme == .dark ? .black : .black)
+            Text(value)
+                .font(.title2)
+                .foregroundColor(colorScheme == .dark ? .black : .black)
+                .bold()
+        }
+         .frame(width: 55, height: 80)
+        .padding()
+        .background(colorScheme == .dark ? Color.white : Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+    }
+}
+
+#Preview {
+    StatisticsView()
+}
 
 
 
 #Preview {
-    PassportSheetView()
+    StatisticsView()
 }

@@ -46,7 +46,7 @@ struct AlternativeHomeView: View {
                         .foregroundColor(.white)
                         .shadow(radius: 100)
                   
-                    PassportSheetView()
+                    StatisticsView()
                     
                     VStack(alignment: .center) {
                         Spacer().frame(height: 4.0)

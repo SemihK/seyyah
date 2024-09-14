@@ -10,17 +10,23 @@ import MapKit
 
 struct HomeView: View {
    
-   
     var body: some View {
 
         @StateObject var viewModel = ContentViewModel()
-    
+       
+        @State var region = MKCoordinateRegion(
+                center: .init(latitude: 41.27224275,longitude: 28.73492786),
+                span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            )
+        
         var userName: String {
             UserDefaults.standard.string(forKey: "userName") ?? "Traveller"
         }
-            VStack {
+        VStack (spacing: 20)
+         {
+                
             ZStack {
-                Color.background
+                Color.white
                     .ignoresSafeArea()
                 ZStack {
                     RoundedRectangle(cornerRadius: 20.0)
@@ -48,13 +54,16 @@ struct HomeView: View {
             
             
             .padding(.top, -350)
-            // MARK harita görünümü gelecek kullanıcının nerede olduğunu göstereceğiz.
                 ZStack {
                                    RoundedRectangle(cornerRadius: 20.0)
                                        .frame(width: 320, height: 200)
                                        .foregroundColor(.gray.opacity(0.1))
-                                   
-                                   Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true)
+                            
+                    Map(
+                      coordinateRegion: $region,
+                      showsUserLocation: true,
+                      userTrackingMode: .constant(.follow)
+                    )
                                        .edgesIgnoringSafeArea(.all)
                                        .onAppear {
                                            viewModel.checkIfLocationIsEnabled()
@@ -73,7 +82,7 @@ struct HomeView: View {
             .clipShape(.buttonBorder)
             .frame(width: 320, height: 200)
             .foregroundColor(.gray.opacity(0.1))
-            .padding(.top, -230)
+            .padding(.bottom, 250)
             
             
             // MARK
@@ -82,13 +91,16 @@ struct HomeView: View {
                 .foregroundColor(.gray.opacity(0.1))
                 .padding(.top, 200)
         }
-        
+                
     }
+       
+        
 
         .navigationBarBackButtonHidden(true)
         
 
     }
+    
     func checkIfOnboardingCompleted() {
             let onboardingCompleted = UserDefaults.standard.bool(forKey: "onboardingCompleted")
             if !onboardingCompleted {

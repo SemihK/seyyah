@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		602E7A342C8937F300122EB5 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A332C8937F300122EB5 /* NavigationBarView.swift */; };
+		602E7A362C893A1F00122EB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A352C893A1F00122EB5 /* SettingsView.swift */; };
+		602E7A382C893AAE00122EB5 /* PassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A372C893AAE00122EB5 /* PassportView.swift */; };
 		605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C25692C88DF8000D9CED3 /* TimeMessage.swift */; };
 		609627512C8369E600BEA22E /* seyyahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627502C8369E600BEA22E /* seyyahApp.swift */; };
 		609627532C8369E600BEA22E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627522C8369E600BEA22E /* ContentView.swift */; };
@@ -17,9 +20,16 @@
 		609627692C83C04600BEA22E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 609627682C83C04600BEA22E /* Lottie */; };
 		6096276B2C83C0CF00BEA22E /* animation2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6096276A2C83C0CF00BEA22E /* animation2.json */; };
 		6096276D2C83C0D800BEA22E /* animation1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6096276C2C83C0D800BEA22E /* animation1.json */; };
+		60AD49E82C914291001CA8F3 /* CountryFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AD49E72C914291001CA8F3 /* CountryFlagView.swift */; };
+		60B5B8FB2C89DC390060E01C /* AlternativeHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B5B8FA2C89DC390060E01C /* AlternativeHomeView.swift */; };
+		60B5B8FE2C8A59240060E01C /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = 60B5B8FD2C8A59240060E01C /* Drawer */; };
+		60DC915A2C9220E3001FC487 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC91592C9220E3001FC487 /* dummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		602E7A332C8937F300122EB5 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		602E7A352C893A1F00122EB5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		602E7A372C893AAE00122EB5 /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
 		605C25692C88DF8000D9CED3 /* TimeMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMessage.swift; sourceTree = "<group>"; };
 		6096274D2C8369E600BEA22E /* seyyah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seyyah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609627502C8369E600BEA22E /* seyyahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seyyahApp.swift; sourceTree = "<group>"; };
@@ -32,6 +42,9 @@
 		609627652C83B62000BEA22E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6096276A2C83C0CF00BEA22E /* animation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation2.json; sourceTree = "<group>"; };
 		6096276C2C83C0D800BEA22E /* animation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation1.json; sourceTree = "<group>"; };
+		60AD49E72C914291001CA8F3 /* CountryFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlagView.swift; sourceTree = "<group>"; };
+		60B5B8FA2C89DC390060E01C /* AlternativeHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeHomeView.swift; sourceTree = "<group>"; };
+		60DC91592C9220E3001FC487 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609627692C83C04600BEA22E /* Lottie in Frameworks */,
+				60B5B8FE2C8A59240060E01C /* Drawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +79,7 @@
 		6096274F2C8369E600BEA22E /* seyyah */ = {
 			isa = PBXGroup;
 			children = (
+				60DC91582C921E00001FC487 /* Screens */,
 				609627642C83B2D100BEA22E /* Info.plist */,
 				609627632C83B2C900BEA22E /* seyyah.entitlements */,
 				609627602C836C2800BEA22E /* Data */,
@@ -89,8 +104,13 @@
 		6096275E2C836C1C00BEA22E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				609627612C836C4A00BEA22E /* OnboardingView.swift */,
+				602E7A352C893A1F00122EB5 /* SettingsView.swift */,
 				609627652C83B62000BEA22E /* HomeView.swift */,
+				609627612C836C4A00BEA22E /* OnboardingView.swift */,
+				602E7A332C8937F300122EB5 /* NavigationBarView.swift */,
+				602E7A372C893AAE00122EB5 /* PassportView.swift */,
+				60B5B8FA2C89DC390060E01C /* AlternativeHomeView.swift */,
+				60AD49E72C914291001CA8F3 /* CountryFlagView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -108,8 +128,16 @@
 			children = (
 				6096276C2C83C0D800BEA22E /* animation1.json */,
 				6096276A2C83C0CF00BEA22E /* animation2.json */,
+				60DC91592C9220E3001FC487 /* dummy.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		60DC91582C921E00001FC487 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +158,7 @@
 			name = seyyah;
 			packageProductDependencies = (
 				609627682C83C04600BEA22E /* Lottie */,
+				60B5B8FD2C8A59240060E01C /* Drawer */,
 			);
 			productName = seyyah;
 			productReference = 6096274D2C8369E600BEA22E /* seyyah.app */;
@@ -161,6 +190,7 @@
 			mainGroup = 609627442C8369E600BEA22E;
 			packageReferences = (
 				609627672C83C04600BEA22E /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				60B5B8FC2C8A59230060E01C /* XCRemoteSwiftPackageReference "swiftui-drawer" */,
 			);
 			productRefGroup = 6096274E2C8369E600BEA22E /* Products */;
 			projectDirPath = "";
@@ -190,10 +220,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602E7A362C893A1F00122EB5 /* SettingsView.swift in Sources */,
 				609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */,
+				60DC915A2C9220E3001FC487 /* dummy.swift in Sources */,
 				605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */,
+				60AD49E82C914291001CA8F3 /* CountryFlagView.swift in Sources */,
+				602E7A342C8937F300122EB5 /* NavigationBarView.swift in Sources */,
+				602E7A382C893AAE00122EB5 /* PassportView.swift in Sources */,
 				609627662C83B62000BEA22E /* HomeView.swift in Sources */,
 				609627532C8369E600BEA22E /* ContentView.swift in Sources */,
+				60B5B8FB2C89DC390060E01C /* AlternativeHomeView.swift in Sources */,
 				609627512C8369E600BEA22E /* seyyahApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -310,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -327,13 +363,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = seyyah/seyyah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"seyyah/Preview Content\"";
 				DEVELOPMENT_TEAM = LKU9ZN4MN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = seyyah/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = seyyah;
+				INFOPLIST_KEY_CFBundleDisplayName = Stampy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Apple ile Giriş yapmak için yüz tanıma kullanımı.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için.";
@@ -368,13 +404,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = seyyah/seyyah.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"seyyah/Preview Content\"";
 				DEVELOPMENT_TEAM = LKU9ZN4MN9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = seyyah/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = seyyah;
+				INFOPLIST_KEY_CFBundleDisplayName = Stampy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Apple ile Giriş yapmak için yüz tanıma kullanımı.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Kullanıcı konumunu ekranda gösterebilmek için.";
@@ -434,6 +470,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		60B5B8FC2C8A59230060E01C /* XCRemoteSwiftPackageReference "swiftui-drawer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maustinstar/swiftui-drawer";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -441,6 +485,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 609627672C83C04600BEA22E /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		60B5B8FD2C8A59240060E01C /* Drawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60B5B8FC2C8A59230060E01C /* XCRemoteSwiftPackageReference "swiftui-drawer" */;
+			productName = Drawer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

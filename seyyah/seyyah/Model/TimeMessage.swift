@@ -19,10 +19,12 @@ var greetingMessage: String {
             return "Good Morning \(userName)"
         case 12..<18:
             return "Good Afternoon \(userName)"
-        case 18..<22:
+        case 18..<23:
             return "Good Evening \(userName)"
+        case 0..<6:
+            return "Good Night \(userName)"
         default:
-            return "Good Day \(userName)"
+            return "Good Night \(userName)"
         }
     }
 

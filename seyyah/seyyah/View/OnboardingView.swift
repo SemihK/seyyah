@@ -17,17 +17,15 @@ enum Step {
     case text
     case cloud
     case name
-    case age
+    case country
     case finish
 }
 
 struct OnboardingView: View {
     @FocusState private var isTextFieldFocused: Bool
     
-    // Tweak these colors if you want
     let backgroundColor: Color = .background
     let accentColor: Color = .backgroundText
-    //
     
     @State var step: Step = .start
     @State var arrowOffset: CGFloat = -3
@@ -38,6 +36,8 @@ struct OnboardingView: View {
     @State var cloudOpacity: CGFloat = 0
     @State var navigate = false
     @State var user: User = User(id: UUID().uuidString, name: "", date: Date().subtractingYears(4))
+    @State private var selectedCountryFlag: String = UserDefaults.standard.string(forKey: "selectedCountry") ?? "🇺🇸"
+        @State private var isShowingSheet = false
     
     var cardsOpacity: CGFloat {
         switch step {
@@ -99,7 +99,7 @@ struct OnboardingView: View {
             200
         case .name:
             0
-        case .age:
+        case .country:
             0
         case .finish:
             0
@@ -120,7 +120,7 @@ struct OnboardingView: View {
             50
         case .name:
             0
-        case .age:
+        case .country:
             0
         case .finish:
             0
@@ -136,7 +136,7 @@ struct OnboardingView: View {
     }
     
     var cardsUserDataOffset: CGFloat {
-        if step == .age || step == .name {
+        if step == .country || step == .name {
             150
         } else {
             0
@@ -166,7 +166,7 @@ struct OnboardingView: View {
             -15
         case .name:
             -15
-        case .age:
+        case .country:
             15
         case .finish:
             345
@@ -208,16 +208,21 @@ struct OnboardingView: View {
                 }
                 
                 if step == .down {
-                    VStack(spacing: 50) {
+                    VStack(spacing: 20) {
+                        Image("Logo-Text")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 180)
+                        
                         Text("Your Digital Passport")
                             .font(.system(.title, design: .rounded, weight: .bold))
                             .multilineTextAlignment(.center)
                         
                         VStack {
-                            Text("for travelers like you.")
-                                .font(.system(.title3, design: .rounded, weight: .regular))
+                            Text("For travelers like you, every journey is a story waiting to be stamped. Capture your adventures and create memories that last with every destination you visit.")
+                                .font(.system(.title3, design: .rounded, weight: .light))
                                 .multilineTextAlignment(.center)
-                            
+                            // Animasyon daha elegant modern bir tasarıma dönüşebilir.
                             VStack {
                                 LottieView(animationFileName: "animation1.json", loopMode: .playOnce)
                                     .frame(width: 200, height: 200)
@@ -236,8 +241,8 @@ struct OnboardingView: View {
                     .transition(.opacity)
                     .transition(.push(from: .top))
                     .frame(maxHeight: .infinity, alignment: .top)
-                    .padding(8)
-                    .padding(.top, UIScreen.height / 5)
+                    .padding(2)
+                    .padding(.top, UIScreen.height / 10)
                 }
                 
                 if step == .text {
@@ -263,13 +268,13 @@ struct OnboardingView: View {
                                 .rotationEffect(Angle(degrees: -cardsRotation + cardRotation))
                                 .offset(x: cardsXOffset - cardXOffset, y: cardsYOffset - cardYOffset - cardsCloudOffset)
                                 .scaleEffect(step == .text && !UIScreen.isSE ? 1.3 : 1)
-                                .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
+                                .scaleEffect(step == .cloud || step == .name || step == .country ? 1.2 : 1)
                         }
                         
                         CardView(imageName: "Barcelona", title: "Barcelona", accentColor: accentColor)
                             .rotationEffect(Angle(degrees: cardsRotation))
                             .offset(x: -cardsXOffset, y: -cardsYOffset + (cardsDownYOffset * 4))
-                            .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
+                            .scaleEffect(step == .cloud || step == .name || step == .country ? 1.2 : 1)
                     }
                     .opacity(cardsOpacity)
                     .offset(y: -cardsUserDataOffset)
@@ -311,29 +316,33 @@ struct OnboardingView: View {
                         .transition(.opacity)
                     }
                     
-                    if step == .age {
-                        VStack(spacing: 0) {
-                            Text("\(user.name)")
-                                .font(.system(.title, design: .rounded, weight: .medium))
-                            
-                            VStack() {
-                                Text("\(user.date.age()) years old")
-                                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                                
-                                DatePicker("Select Date", selection: $user.date, displayedComponents: .date)
-                                    .datePickerStyle(.compact)
-                                    .fixedSize()
-                                    .tint(accentColor)
-                                    .foregroundStyle(accentColor)
-                            }
-                            .padding(.top)
-                        }
-                        .offset(y: 20)
-                        .transition(.opacity)
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
-                    }
+                    if step == .country {
+                        VStack(spacing: 20) {
+                                    Text("Where are you from?")
+                                        .font(.system(.largeTitle, design: .rounded).bold())
+                                    
+                                    Text("Select your country for digital passport.")
+                                        .tint(.pink)
+                                        .foregroundStyle(.backgroundText)
+                                    
+                                    Button(action: {
+                                        isShowingSheet.toggle()
+                                    }) {
+                                        Text(selectedCountryFlag)  // Seçilen bayrak buraya gelecek
+                                            .font(.system(size: 50))
+                                            .foregroundColor(.backgroundText)
+                                            .padding()
+                                            .cornerRadius(10)
+                                    }
+                                }
+                                .padding()
+                                .sheet(isPresented: $isShowingSheet) {
+                                    CountrySelectionView(selectedCountryFlag: $selectedCountryFlag)
+                                }
+                                .onAppear {
+                                    loadSavedCountry()
+                                }
+                           }
                     
                     VStack(spacing: 0) {
                         Text("Welcome to ")
@@ -394,12 +403,12 @@ struct OnboardingView: View {
                         CardView(imageName: "Paris", title: "Paris", accentColor: accentColor)
                             .rotationEffect(Angle(degrees: -cardsRotation - finishRotation))
                             .offset(x: cardsXOffset, y: cardsYOffset - cardsDownYOffset - (cardsCloudOffset * 0.9))
-                            .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
+                            .scaleEffect(step == .cloud || step == .name || step == .country ? 1.2 : 1)
                         
                         CardView(imageName: "Florence", title: "Florence", accentColor: accentColor)
                             .rotationEffect(Angle(degrees: cardsRotation + finishRotation))
                             .offset(x: -cardsXOffset, y: -cardsYOffset + (cardsDownYOffset * 3) + cardsCloudOffset)
-                            .scaleEffect(step == .cloud || step == .name || step == .age ? 1.2 : 1)
+                            .scaleEffect(step == .cloud || step == .name || step == .country ? 1.2 : 1)
                     }
                     .padding(.top, 40)
                     .offset(y: cardsUserDataOffset)
@@ -410,7 +419,7 @@ struct OnboardingView: View {
             .background(backgroundColor)
             .foregroundStyle(accentColor)
             .navigationDestination(isPresented: $navigate) {
-                HomeView() // Kullanıcıyı HomeView ekranına yönlendiriyoruz.
+                HomeView()
             }
             .safeAreaInset(edge: .bottom) {
                 VStack {
@@ -421,7 +430,7 @@ struct OnboardingView: View {
                                     .frame(maxWidth: 200, maxHeight: 45)
                                     .foregroundStyle(.red)
                                 
-                                Text("Start with offline")
+                                Text("Start")
                                     .foregroundStyle(.white)
                                     .font(.system(.body, design: .rounded, weight: .semibold))
                             }
@@ -483,8 +492,8 @@ struct OnboardingView: View {
         case .cloud:
             nextStep = .name
         case .name:
-            nextStep = .age
-        case .age:
+            nextStep = .country
+        case .country:
             nextStep = .finish
         case .finish:
             nextStep = .finish
@@ -492,13 +501,20 @@ struct OnboardingView: View {
         
         step = nextStep
     }
+    func loadSavedCountry() {
+            if let savedCountry = UserDefaults.standard.string(forKey: "selectedCountry") {
+                selectedCountryFlag = savedCountry
+            }
+        }
     
     var exampleString = "Istanbul is a city where history and modernity coexist in harmony. At every corner, you can discover remnants of various civilizations. The mesmerizing architecture of the Hagia Sophia, the impressive grandeur of the Topkapı Palace, and the graceful lines of the Süleymaniye Mosque are all evidence of Istanbul's deep-rooted history."
 }
 
+
 #Preview {
     OnboardingView()
 }
+
 
 struct LottieView: UIViewRepresentable {
     
@@ -517,6 +533,7 @@ struct LottieView: UIViewRepresentable {
         return animationView
     }
 }
+
 
 struct CardView: View {
     @State var imageName: String
@@ -545,6 +562,7 @@ struct CardView: View {
         .frame(maxWidth: 220, maxHeight: 200)
         .foregroundStyle(accentColor)
     }
+    
 }
 
 struct User: Codable {

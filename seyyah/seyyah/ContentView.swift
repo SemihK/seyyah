@@ -12,7 +12,7 @@ struct ContentView: View {
 
     var body: some View {
         if onboardingCompleted {
-            HomeView()
+            NavigationBarView()
         } else {
             OnboardingView()
         }

@@ -10,6 +10,7 @@
 		602E7A342C8937F300122EB5 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A332C8937F300122EB5 /* NavigationBarView.swift */; };
 		602E7A362C893A1F00122EB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A352C893A1F00122EB5 /* SettingsView.swift */; };
 		602E7A382C893AAE00122EB5 /* PassportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602E7A372C893AAE00122EB5 /* PassportView.swift */; };
+		604D668B2C9661A40030A393 /* NotificationExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604D668A2C9661A40030A393 /* NotificationExplanationView.swift */; };
 		605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C25692C88DF8000D9CED3 /* TimeMessage.swift */; };
 		609627512C8369E600BEA22E /* seyyahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627502C8369E600BEA22E /* seyyahApp.swift */; };
 		609627532C8369E600BEA22E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609627522C8369E600BEA22E /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 		602E7A332C8937F300122EB5 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		602E7A352C893A1F00122EB5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		602E7A372C893AAE00122EB5 /* PassportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportView.swift; sourceTree = "<group>"; };
+		604D668A2C9661A40030A393 /* NotificationExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExplanationView.swift; sourceTree = "<group>"; };
 		605C25692C88DF8000D9CED3 /* TimeMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMessage.swift; sourceTree = "<group>"; };
 		6096274D2C8369E600BEA22E /* seyyah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seyyah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609627502C8369E600BEA22E /* seyyahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seyyahApp.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				602E7A372C893AAE00122EB5 /* PassportView.swift */,
 				60B5B8FA2C89DC390060E01C /* AlternativeHomeView.swift */,
 				60AD49E72C914291001CA8F3 /* CountryFlagView.swift */,
+				604D668A2C9661A40030A393 /* NotificationExplanationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				602E7A362C893A1F00122EB5 /* SettingsView.swift in Sources */,
 				609627622C836C4A00BEA22E /* OnboardingView.swift in Sources */,
 				60DC915A2C9220E3001FC487 /* dummy.swift in Sources */,
+				604D668B2C9661A40030A393 /* NotificationExplanationView.swift in Sources */,
 				605C256A2C88DF8000D9CED3 /* TimeMessage.swift in Sources */,
 				60AD49E82C914291001CA8F3 /* CountryFlagView.swift in Sources */,
 				602E7A342C8937F300122EB5 /* NavigationBarView.swift in Sources */,

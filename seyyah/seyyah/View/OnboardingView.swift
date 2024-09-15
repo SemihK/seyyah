@@ -8,6 +8,8 @@
 
 import SwiftUI
 import Lottie
+import AuthenticationServices
+
 
 enum Step {
     case start
@@ -19,7 +21,7 @@ enum Step {
     case country
     case finish
 }
-
+    
 struct OnboardingView: View {
     @FocusState private var isTextFieldFocused: Bool
     
@@ -171,6 +173,9 @@ struct OnboardingView: View {
             345
         }
     }
+    
+    @Environment(\.colorScheme) var colorScheme
+    @State private var userID: String = ""
     
     var body: some View {
         NavigationStack {
@@ -385,7 +390,7 @@ struct OnboardingView: View {
                                 .fontWeight(.regular)
                             Text("Everything is Digital")
                                 .font(.system(.title, design: .rounded, weight: .medium))
-                            Text("off course your trip is real")
+                            Text("of course your trip is real")
                                 .font(.system(.title3, design: .rounded, weight: .regular))
                                 .lineLimit(3)
                                 .multilineTextAlignment(.center)
@@ -416,6 +421,54 @@ struct OnboardingView: View {
                     .offset(y: cardsUserDataOffset)
                 }
                 
+                // Sayfanın alt kısmındaki butonlar için
+                VStack {
+                    Spacer() // İçeriği yukarıda tutar
+                    
+                    if step == .finish {
+                        VStack(spacing: 20) {
+                            Button(action: {
+                                UserDefaults.standard.set(user.name, forKey: "userName")
+                                UserDefaults.standard.set(true, forKey: "onboardingCompleted")
+                                navigate = true
+                            }) {
+                                Text("Başla")
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .background(Color.red)
+                                    .foregroundColor(.white)
+                                    .font(.system(.body, design: .rounded, weight: .semibold))
+                                    .cornerRadius(12)
+                            }
+                            
+                            SignInWithAppleButton(
+                                .signIn,
+                                onRequest: configureAppleSignIn,
+                                onCompletion: handleAppleSignInResult
+                            )
+                            .signInWithAppleButtonStyle(colorScheme == .dark ? .white : .black)
+                            .frame(height: 50)
+                            .cornerRadius(12)
+                        }
+                        .frame(width: UIScreen.main.bounds.width * 0.8)
+                        .padding(.bottom, 30)
+                    } else {
+                        Button(action: {
+                            withAnimation {
+                                advanceStep()
+                            }
+                        }) {
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 24, weight: .semibold))
+                                .frame(width: 60, height: 60)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .clipShape(Circle())
+                        }
+                        .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : 1)
+                        .padding(.bottom, 30)
+                    }
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(backgroundColor)
@@ -423,59 +476,10 @@ struct OnboardingView: View {
             .navigationDestination(isPresented: $navigate) {
                 HomeView()
             }
-            .safeAreaInset(edge: .bottom) {
-                VStack {
-                    if step == .finish {
-                        NavigationLink(destination: HomeView()) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(maxWidth: 200, maxHeight: 45)
-                                    .foregroundStyle(.red)
-                                
-                                Text("Start")
-                                    .foregroundStyle(.white)
-                                    .font(.system(.body, design: .rounded, weight: .semibold))
-                            }
-                        }
-                        .simultaneousGesture(TapGesture().onEnded {
-                            UserDefaults.standard.set(user.name, forKey: "userName")
-                            UserDefaults.standard.set(true, forKey: "onboardingCompleted")
-                        })
-                    } else {
-                        Button(action: {
-                            DispatchQueue.main.async {
-                                withAnimation(.snappy(duration: 0.8), {
-                                    advanceStep()
-                                })
-                            }
-                        }) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .frame(maxWidth: 140, maxHeight: 45)
-                                    .foregroundStyle(.red)
-                                
-                                Image(systemName: "arrowshape.right")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxHeight: 24)
-                                    .foregroundStyle(.white)
-                                    .fontWeight(.medium)
-                                    .offset(x: arrowOffset)
-                                    .onAppear {
-                                        DispatchQueue.main.async {
-                                            withAnimation(.easeInOut(duration: 0.5).repeatForever()) {
-                                                arrowOffset = 3
-                                            }
-                                        }
-                                    }
-                            }
-                        }
-                    }
-                }
-                .padding(.bottom, UIScreen.isSE ? 8 : 0)
-                .opacity(step == .name && user.name.isEmpty || isTextFieldFocused ? 0 : buttonOpacity)
-                
-            }}
+        }
+        .onAppear {
+            setupInitialAnimations()
+        }
     }
     
     func advanceStep() {
@@ -510,6 +514,59 @@ struct OnboardingView: View {
         }
     
     var exampleString = "Istanbul is a city where history and modernity coexist in harmony. At every corner, you can discover remnants of various civilizations. The mesmerizing architecture of the Hagia Sophia, the impressive grandeur of the Topkapı Palace, and the graceful lines of the Süleymaniye Mosque are all evidence of Istanbul's deep-rooted history."
+    
+    func configureAppleSignIn(_ request: ASAuthorizationAppleIDRequest) {
+        request.requestedScopes = [.fullName, .email]
+    }
+    
+    func handleAppleSignInResult(_ result: Result<ASAuthorization, Error>) {
+        switch result {
+        case .success(let auth):
+            switch auth.credential {
+            case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                let userIdentifier = appleIDCredential.user
+                let fullName = appleIDCredential.fullName
+                let email = appleIDCredential.email
+                
+                // Kullanıcı bilgilerini kaydet ve işle
+                userID = userIdentifier
+                if let name = fullName?.givenName {
+                    user.name = name
+                }
+                
+                // Kullanıcı bilgilerini kaydet
+                UserDefaults.standard.set(userID, forKey: "appleUserID")
+                UserDefaults.standard.set(user.name, forKey: "userName")
+                UserDefaults.standard.set(true, forKey: "onboardingCompleted")
+                
+                // Ana sayfaya yönlendir
+                navigate = true
+                
+            default:
+                break
+            }
+        case .failure(let error):
+            print("Apple Sign In Hatası: \(error.localizedDescription)")
+        }
+    }
+    
+    private func setupInitialAnimations() {
+        DispatchQueue.main.async {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                logoOpacity = 1
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation(.easeInOut(duration: 1)) {
+                buttonOpacity = 1
+            }
+            
+            withAnimation(.snappy(duration: 0.8)) {
+                step = .appear
+            }
+        }
+    }
 }
 
 

@@ -11,7 +11,13 @@ struct NotificationExplanationView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 30) {
+            Image("Logo-Text")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 150)
+            
+            
             Image(systemName: "bell.badge.fill")
                 .font(.system(size: 60))
                 .foregroundColor(.blue)
@@ -20,7 +26,7 @@ struct NotificationExplanationView: View {
                 .font(.title)
                 .fontWeight(.bold)
             
-            Text("Uygulamamızın tam olarak çalışması için bildirimlere ihtiyacımız var. Bildirimler sayesinde size önemli güncellemeler, seyahat uyarıları ve özel teklifler sunabiliriz.")
+            Text("Bildirimlerin bazen can sıkıcı olduğunu kabul ediyoruz, fakat uygulamamızın tam olarak çalışması için bildirimlere ihtiyacımız var. Bildirimler sayesinde size önemli güncellemeler, seyahat bildirimleri ve özel rozetler sunabiliriz.")
                 .multilineTextAlignment(.center)
                 .padding()
             
